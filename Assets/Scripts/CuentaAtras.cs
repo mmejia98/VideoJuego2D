@@ -12,6 +12,7 @@ public class CuentaAtras : MonoBehaviour
     public SpriteRenderer contadorNumerosComp;
 
     public GameObject controladorCocheGO;
+    public Cronometro cronometroScript;
     public GameObject cocheGO;
 
 
@@ -31,6 +32,8 @@ public class CuentaAtras : MonoBehaviour
 
         cocheGO = GameObject.Find("Coche");
         controladorCocheGO = GameObject.Find("ControladorCoche");
+
+        cronometroScript = GameObject.Find("Cronometro").GetComponent<Cronometro>();
 
 
         InicioCuentaAtras();
@@ -55,6 +58,7 @@ public class CuentaAtras : MonoBehaviour
 
         contadorNumerosComp.sprite = numeros[3];
         motorCarreteraScript.iniciaJuego = true;
+        cronometroScript.cronometroEncendido = true;
         contadorNumerosGO.GetComponent<AudioSource>().Play();
         cocheGO.GetComponent<AudioSource>().Play();
         motorCarreteraScript.musica.GetComponent<AudioSource>().Play();

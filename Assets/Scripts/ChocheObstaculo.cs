@@ -9,6 +9,9 @@ public class ChocheObstaculo : MonoBehaviour
 
     public GameObject audioFXGO;
     public AudioFX audioFXScript;
+
+    public GameObject vida;
+    public Vida vidaScript;
     void Start()
     {
         cronometroGO = GameObject.FindObjectOfType<Cronometro>().gameObject;
@@ -16,6 +19,9 @@ public class ChocheObstaculo : MonoBehaviour
 
         audioFXGO = GameObject.FindObjectOfType<AudioFX>().gameObject;
         audioFXScript = audioFXGO.GetComponent<AudioFX>();
+
+        vida = GameObject.Find("HealthController");
+        vidaScript = vida.GetComponent<Vida>();
     }
     
     void OnTriggerEnter2D(Collider2D other)
@@ -23,7 +29,7 @@ public class ChocheObstaculo : MonoBehaviour
         if(other.GetComponent<Coche>() != null)
         {
             audioFXScript.FXSonidoChoque();
-            cronometroScript.tiempo = cronometroScript.tiempo - 20;
+            vidaScript.contadorVidas = vidaScript.contadorVidas - 1;
             Destroy(this.gameObject);
         }
     }

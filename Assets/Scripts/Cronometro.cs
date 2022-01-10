@@ -12,28 +12,26 @@ public class Cronometro : MonoBehaviour
     public Text txtTiempo;
     public Text txtDistancia;
     public Text txtDistanciaFinal;
+    public bool cronometroEncendido;
 
     void Start()
     {
         motorCarreterasGO = GameObject.Find("MotorCarretera");
         motorCarreteraScript = motorCarreterasGO.GetComponent<MotorCarreteras>();
-        txtTiempo.text = "2:00";
+        txtTiempo.text = "0:00";
         txtDistancia.text = "0";
-        tiempo = 120;
+        tiempo = 0;
     }
 
     void Update()
     {
-        if (motorCarreteraScript.iniciaJuego == true && motorCarreteraScript.juegoTerminado == false)
+        if (cronometroEncendido == true && motorCarreteraScript.iniciaJuego == true && motorCarreteraScript.juegoTerminado == false)
         {
             CalculoTiempoDistancia();
         }
 
-        if (tiempo <= 0 && motorCarreteraScript.juegoTerminado == false)
+        if (motorCarreteraScript.juegoTerminado == true)
         {
-            
-            motorCarreteraScript.juegoTerminado = true;
-            motorCarreteraScript.JuegoTerminadoEstado();
             txtDistanciaFinal.text = ((int)distancia).ToString() + "mts";
             txtTiempo.text = "0:00";
         }
@@ -43,7 +41,7 @@ public class Cronometro : MonoBehaviour
     {
         distancia += Time.deltaTime * motorCarreteraScript.velocidad;
         txtDistancia.text = ((int)distancia).ToString();
-        tiempo -= Time.deltaTime;
+        tiempo += Time.deltaTime;
         int minutos = (int)tiempo / 60;
         int segundos = (int)tiempo % 60;
         txtTiempo.text = minutos.ToString() + ":" + segundos.ToString().PadLeft(2, '0');
