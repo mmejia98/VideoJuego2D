@@ -45,5 +45,5 @@ public class Cronometro : MonoBehaviour
         int minutos = (int)tiempo / 60;
         int segundos = (int)tiempo % 60;
         txtTiempo.text = minutos.ToString() + ":" + segundos.ToString().PadLeft(2, '0');
-    }
+    }  
 }
